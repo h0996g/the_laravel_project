@@ -28,7 +28,7 @@ class AuthController extends Controller
 //            throw ValidationException::withMessages([
 //                'email' => ['This email is alredy used'],
 //            ]);
-            return response()->json(['email'=>'This email is alredy used'],422);
+            return response()->json(['message'=>'This email is alredy used'],422);
 
 
         }
@@ -63,7 +63,7 @@ class AuthController extends Controller
 //            throw ValidationException::withMessages([
 //                'email' => ['This email is alredy used'],
 //            ]);
-            return response()->json(['email'=>'This email is alredy used'],422);
+            return response()->json(['message'=>'This email is alredy used'],422);
 
         }
         $input=$request->except('address');
@@ -93,7 +93,7 @@ class AuthController extends Controller
 //                'email' => ['Email is incorrect.'],
 //
 //            ]);
-            return response()->json(['email'=>'Email is incorrect.'],422);
+            return response()->json(['message'=>'Email is incorrect.'],422);
 
         }
 
