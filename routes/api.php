@@ -32,7 +32,9 @@ Route::post('registerclient', 'AuthController@registerclient');
 
 Route::post('registeragence', 'AuthController@registeragence');
 
-Route::post('login', 'AuthController@login');
+Route::post('loginclient', 'AuthController@LoginClient');
+
+Route::post('loginagence', 'AuthController@LoginAgence');
 
 Route::get('aa', function (){
     return 'kdfjfk';
