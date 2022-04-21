@@ -16,7 +16,8 @@ class CreateAgencesTable extends Migration
         Schema::create('agences', function (Blueprint $table) {
             $table->id();
             $table->string('address');
-            $table->bigInteger('user_id');
+            $table->unsignedbigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });
