@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
     use HasFactory;
-    protected $fillable=['agence_id','category_id','address','description','price','space','n_etage','n_chambre','wilaya','photo'];
+    protected $fillable=['agence_id','category_id','address','description','price','space','n_etage','n_chambre','wilaya','photo','papiers','specification','condition_de_paiment','type_offer','type_vente'];
+    protected $casts = [
+        'photo' => 'array',
+        'condition_de_paiment' => 'array',
+        'specification' => 'array',
+        'papiers' => 'array',
+    ];
     public function users(){
         return $this->belongsToMany(User::class);
     }
@@ -16,7 +22,7 @@ class Offer extends Model
         return $this->hasMany(Message::class);
     }
     public  function categories(){
-        return $this->belongsTo(Message::class);
+        return $this->belongsTo(Category::class);
     }
 
     public  function agences(){

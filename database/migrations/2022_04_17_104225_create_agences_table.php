@@ -30,6 +30,7 @@ class CreateAgencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agences');
+        Schema::disableForeignKeyConstraints();
+        Schema::drop('agences');
     }
 }

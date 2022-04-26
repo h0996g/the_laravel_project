@@ -1,10 +1,6 @@
 <?php
 
-use App\Models\Agence;
-use App\Models\Client;
-use App\Models\User;
 use Http\Controller\AuthController;
-use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,21 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware('auth:sanctum')->get('/user', 'UserController@getuser');
-// function (Request $request) {
-    
-
-//     $a= $request->user();
-//      $client = Client::where('user_id', $a['id'])->first();
-//      $agence = Agence::where('user_id', $a['id'])->first();
-//      if( $client){
-// $a['client']=$client;
-//      }
-//      if($agence){
-//       $a['agence']=$agence;   
-//      }
-//      return $a;
-// });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 
 Route::middleware('auth:sanctum')->get('/remove', function (Request $request) {
@@ -44,30 +28,51 @@ Route::middleware('auth:sanctum')->get('/remove', function (Request $request) {
     return 'tokens are deleted';
 });
 
+Route::post('registerclient', 'AuthauController@registerclient');
 
-// Route::middleware('auth:sanctum')->get('/remove', function (Request $request) {
-//     $user = $request->user();
-//     $user->tokens()->delete();
-//     return 'tokens are deleted';
-// });
+Route::post('registeragence', 'AuthauController@registeragence');
 
-Route::post('registerclient', 'AuthController@registerclient');
+Route::post('loginclient', 'AuthauController@LoginClient');
 
-Route::post('registeragence', 'AuthController@registeragence');
+Route::post('loginagence', 'AuthauController@LoginAgence');
 
+Route::get('aa', function (){
+    return 'kdfjfk';
+});
 
-
-
-
-Route::post('loginclient', 'AuthController@LoginClient');
-
-Route::post('loginagence', 'AuthController@LoginAgence');
+Route::get('/ala','HelloController@ala');
 
 
-// Route::get('/getuser', 'UserController@getuser');
+//offer routes
+
+Route::post('/createoffer', 'OfferController@createoffer');
+
+
+Route::get('/getofferall', 'OfferController@getofferall');
+Route::get('/getofferid/{a}/{b}/{c}', 'OfferController@getofferid');
+Route::get('/getofferagence/{a}', 'OfferController@getofferagence');
+Route::get('/getoffercategorie/{a}', 'OfferController@getoffercategorie');
+
+Route::post('/updateoffer/{a}', 'OfferController@updateoffer');
+Route::delete('/deleteoffer/{a}', 'OfferController@deleteoffer');
+
+//user routes
+Route::get('/getuser', 'UserController@getuser');
 Route::post('/updateagence/{id}', 'UserController@updateagence');
 Route::post('/updateclient/{id}', 'UserController@updateclient');
 Route::get('/searchagence/{search}', 'UserController@search');
 
 
+// favorite routes
 
+Route::post('/addfavorite', 'FavoriteController@ajouterfavorit');
+Route::delete('/deletefavorite/{a}/{b}', 'FavoriteController@deletefavorite');
+Route::get('/getfavorite/{a}', 'FavoriteController@getfavorite');
+
+
+// messages routes
+
+
+Route::post('/addmessage', 'MessageController@ajoutermessage');
+Route::delete('/deletemessage/{a}', 'MessageController@deletemessage');
+Route::get('/getmessage/{a}', 'MessageController@getmessage');

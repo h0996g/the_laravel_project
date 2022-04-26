@@ -10,6 +10,6 @@ class Category extends Model
     use HasFactory;
     protected $fillable=['name'];
     public  function offer(){
-        return $this->hasMany(Message::class);
+        return $this->hasMany(Offer::class);
     }
 }

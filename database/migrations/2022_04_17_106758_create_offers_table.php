@@ -15,8 +15,13 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('agence_id');
-            $table->bigInteger('category_id');
+
+            $table->unsignedbigInteger('agence_id');
+            $table->foreign('agence_id')->references('id')->on('agences');
+
+            $table->unsignedbigInteger('category_id');
+
+           $table->foreign('category_id')->references('id')->on('categories');
             $table->string('address');
             $table->text('description');
             $table->double('price');
@@ -25,6 +30,11 @@ class CreateOffersTable extends Migration
             $table->integer('n_chambre')->nullable();
             $table->string('wilaya');
             $table->json('photo')->nullable();
+            $table->string('type_vente');
+            $table->string('type_offer');
+            $table->json('condition_de_paiment')->nullable();
+            $table->json('specification')->nullable();
+            $table->json('papiers')->nullable();
 
             $table->timestamps();
         });

@@ -4,17 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Agence;
 use App\Models\Client;
-use Illuminate\Http\Request;
-
-//  -----------
-use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 
-class phAuthController extends Controller
+class AuthauController extends Controller
 {
-
     public function registerclient(Request $request)
     {
         $request->validate([

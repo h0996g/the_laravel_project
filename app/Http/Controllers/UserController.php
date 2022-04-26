@@ -19,16 +19,16 @@ class UserController extends Controller
     public function getuser( Request $request)
     {
         $a= $request->user();
-     $client = Client::where('user_id', $a['id'])->first();
-     $agence = Agence::where('user_id', $a['id'])->first();
-     if( $client){
-$a['client']=$client;
-     }
-     if($agence){
-      $a['agence']=$agence;   
-     }
-     return $a;
-        
+        $client = Client::where('user_id', $a['id'])->first();
+        $agence = Agence::where('user_id', $a['id'])->first();
+        if( $client){
+            $a['client']=$client;
+        }
+        if($agence){
+            $a['agence']=$agence;
+        }
+        return $a;
+
     }
 
     /**
@@ -49,19 +49,18 @@ $a['client']=$client;
      */
     public function updateagence(Request $request, $id)
     {
-        $user = User::where('email', $request['email'])->first();
-        $a=DB::table('users')->select('email')->where('id',$id)->get();
+        $user = User::where('email', $request['email'])->skip(1)->first();
 
-        if ($user&& $a!=$request['email']) {
+        if ($user) {
 
             return response()->json(['email' => 'This email is already used'], 422);
 
         }
         user::where('id', $id)
-        ->update(['name' => $request['name'],
-    'email'=>$request['email'] ,'password'=>$request['password']=Hash::make($request['password']),'phone' => $request['phone']]);
-    Agence::where('user_id',$id)
-    ->update(['address' => $request['address']]);
+            ->update(['name' => $request['name'],
+                'email'=>$request['email'] ,'password'=>$request['password']=Hash::make($request['password']),'phone' => $request['phone']]);
+        Agence::where('user_id',$id)
+            ->update(['address' => $request['address']]);
         return 'that change happened 10 sec ago';
     }
 
@@ -74,21 +73,21 @@ $a['client']=$client;
     public function updateclient(Request $request,$id)
     {
 
-         $user = User::where('email', $request['email'])->first();
-        
+        $user = User::where('email', $request['email'])->first();
+
         $a=DB::table('users')->select('email')->where('id',$id)->get();
-              
+
         if ($user && $a!=$request['email']) {
-                 print($a);
-                 print($request['email']);
+            print($a);
+            print($request['email']);
             return response()->json(['email' => 'This email is already used'], 422);
 
         }
         user::where('id', $id)
-        ->update(['name' => $request['name'],
-    'email'=>$request['email'] ,'password'=>$request['password']=Hash::make($request['password']),'phone' => $request['phone']]);
-    Client::where('user_id',$id)
-    ->update(['prenom' => $request['prenom']]);
+            ->update(['name' => $request['name'],
+                'email'=>$request['email'] ,'password'=>$request['password']=Hash::make($request['password']),'phone' => $request['phone']]);
+        Client::where('user_id',$id)
+            ->update(['prenom' => $request['prenom']]);
         return 'that change happened 10 sec ago';
     }
 
@@ -124,7 +123,7 @@ $a['client']=$client;
     public function search($search)
     {
         $liste=DB::table('users')->join('clients','users.id','=','clients.user_id')
-        ->select('users.name')->where('name' , 'like' ,$search.'%')->get();
+            ->select('users.name')->where('name' , 'like' ,$search.'%')->get();
         return $liste;
     }
 }
