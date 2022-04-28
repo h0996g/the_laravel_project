@@ -91,9 +91,7 @@ class OfferController extends Controller
 
     public function getoffercategorie($id){
 
-
-            $offersss = Offer::where('category_id',$id )->get();
-            return $offersss;
+        return $offersss = Offer::where('category_id',$id )->get();
     }
 
 

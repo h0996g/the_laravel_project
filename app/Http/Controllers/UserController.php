@@ -47,22 +47,27 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function updateagence(Request $request, $id)
+    public function updateagence(Request $request)
     {
-        $user = User::where('email', $request['email'])->skip(1)->first();
 
-        if ($user) {
-
-            return response()->json(['email' => 'This email is already used'], 422);
-
-        }
-        user::where('id', $id)
+        user::where('id', $request['id'])
             ->update(['name' => $request['name'],
                 'email'=>$request['email'] ,'password'=>$request['password']=Hash::make($request['password']),'phone' => $request['phone']]);
-        Agence::where('user_id',$id)
+        Agence::where('user_id',$request['id'])
             ->update(['address' => $request['address']]);
         return 'that change happened 10 sec ago';
     }
+
+//    public function updateagence(Request $request, $id)
+//    {
+//
+//        user::where('id', $id)
+//            ->update(['name' => $request['name'],
+//                'email'=>$request['email'] ,'password'=>$request['password']=Hash::make($request['password']),'phone' => $request['phone']]);
+//        Agence::where('user_id',$id)
+//            ->update(['address' => $request['address']]);
+//        return 'that change happened 10 sec ago';
+//    }
 
     /**
      * Display the specified resource.
@@ -70,26 +75,28 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateclient(Request $request,$id)
+    public function updateclient(Request $request)
     {
 
-        $user = User::where('email', $request['email'])->first();
 
-        $a=DB::table('users')->select('email')->where('id',$id)->get();
-
-        if ($user && $a!=$request['email']) {
-            print($a);
-            print($request['email']);
-            return response()->json(['email' => 'This email is already used'], 422);
-
-        }
-        user::where('id', $id)
+        user::where('id', $request['id'])
             ->update(['name' => $request['name'],
                 'email'=>$request['email'] ,'password'=>$request['password']=Hash::make($request['password']),'phone' => $request['phone']]);
-        Client::where('user_id',$id)
+        Client::where('user_id',$request['id'])
             ->update(['prenom' => $request['prenom']]);
         return 'that change happened 10 sec ago';
     }
+//    public function updateclient(Request $request,$id)
+//    {
+//
+//
+//        user::where('id', $id)
+//            ->update(['name' => $request['name'],
+//                'email'=>$request['email'] ,'password'=>$request['password']=Hash::make($request['password']),'phone' => $request['phone']]);
+//        Client::where('user_id',$id)
+//            ->update(['prenom' => $request['prenom']]);
+//        return 'that change happened 10 sec ago';
+//    }
 
     /**
      * Show the form for editing the specified resource.
