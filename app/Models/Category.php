@@ -12,4 +12,6 @@ class Category extends Model
     public  function offer(){
         return $this->hasMany(Offer::class);
     }
+    protected $primaryKey = 'type_vente';
+    protected $keyType = 'string';
 }

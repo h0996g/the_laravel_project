@@ -19,9 +19,11 @@ class CreateOffersTable extends Migration
             $table->unsignedbigInteger('agence_id');
             $table->foreign('agence_id')->references('id')->on('agences');
 
-            $table->unsignedbigInteger('category_id');
+            $table->string('type_vente');
+            $table->foreign('type_vente')->references('name')->on('categories');
+        //     $table->unsignedbigInteger('category_id');
 
-           $table->foreign('category_id')->references('id')->on('categories');
+        //    $table->foreign('category_id')->references('id')->on('categories');
             $table->string('address');
             $table->text('description');
             $table->double('price');
@@ -30,7 +32,7 @@ class CreateOffersTable extends Migration
             $table->integer('n_chambre')->nullable();
             $table->string('wilaya');
             $table->json('photo')->nullable();
-            $table->string('type_vente');
+           
             $table->string('type_offer');
             $table->json('condition_de_paiment')->nullable();
             $table->json('specification')->nullable();

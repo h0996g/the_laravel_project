@@ -1,6 +1,7 @@
 <?php
 
 use Http\Controller\AuthController;
+use Http\Controller\OfferController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

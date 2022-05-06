@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Favorite;
 use App\Models\Offer;
 use App\Models\User;
+use App\Models\Agence;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
@@ -13,24 +14,29 @@ class OfferController extends Controller
 
 
 
-        $flight = Offer::create([
-            'agence_id' => $request['agence_id'],
-            'category_id' => $request['category_id'],
-            'address' => $request['address'],
-            'description' => $request['description'],
-            'price' => $request['price'],
-            'space' =>  $request['space'],
-            'n_etage' =>  $request['n_etage'],
-            'n_chambre' =>  $request['n_chambre'],
-            'wilaya' =>  $request['wilaya'],
-            'photo'=>  $request['photo'],
-            'type_vente' =>  $request['type_vente'],
-            'type_offer' =>  $request['type_offer'],
-            'condition_de_paiment' =>  $request['condition_de_paiment'],
-            'specification' =>  $request['specification'],
-            'papiers' =>  $request['papiers'],
-        ]);
-        return 'offer has been added';
+        // $flight = Offer::create([
+        //     'agence_id' => $request['agence_id'],
+        //     'category_id' => $request['category_id'],
+        //     'address' => $request['address'],
+        //     'description' => $request['description'],
+        //     'price' => $request['price'],
+        //     'space' =>  $request['space'],
+        //     'n_etage' =>  $request['n_etage'],
+        //     'n_chambre' =>  $request['n_chambre'],
+        //     'wilaya' =>  $request['wilaya'],
+        //     'photo'=>  $request['photo'],
+        //     'type_vente' =>  $request['type_vente'],
+        //     'type_offer' =>  $request['type_offer'],
+        //     'condition_de_paiment' =>  $request['condition_de_paiment'],
+        //     'specification' =>  $request['specification'],
+        //     'papiers' =>  $request['papiers'],
+        // ]);
+        $user = $request->user();
+        $input=$request->except('agence_id');
+       $agence = Agence::where('user_id', $user['id'])->first();
+       $input['agence_id']=$agence['id'];
+        $offer= Offer::create($input);
+        return $offer->only(['description', 'price']);
     }
 
     public function updateoffer(Request $request,$id){
