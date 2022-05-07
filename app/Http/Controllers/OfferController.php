@@ -7,6 +7,7 @@ use App\Models\Offer;
 use App\Models\User;
 use App\Models\Agence;
 use Illuminate\Http\Request;
+use App\Http\Resources\OfferResource;
 
 class OfferController extends Controller
 {
@@ -92,13 +93,16 @@ class OfferController extends Controller
     public function getofferagence(Request $request){
 
         $user = $request->user();
-       $agence = Agence::where('user_id', $user['id'])->first();
+        $agence = Agence::where('user_id', $user['id'])->first();
     //    $input['agence_id']=$agence['id'];
 
 
         $offerss = Offer::where('agence_id',$agence['id'] )->get();
-        
-return response(json_encode($offerss), 201);;
+
+        return OfferResource::collection($offerss);
+
+
+        return response()->json();
 
         // $offerss['photo']=json_decode($offerss['photo']);
 

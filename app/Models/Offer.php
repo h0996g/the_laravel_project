@@ -9,6 +9,7 @@ class Offer extends Model
 {
     use HasFactory;
     protected $fillable=['agence_id','category_id','address','description','price','space','n_etage','n_chambre','wilaya','photo','papiers','specification','condition_de_paiment','type_offer','type_vente'];
+
     protected $casts = [
         'photo' => 'array',
         'condition_de_paiment' => 'array',
