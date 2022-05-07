@@ -89,9 +89,40 @@ class OfferController extends Controller
     }
 
 
-    public function getofferagence($id){
+    public function getofferagence(Request $request){
 
-        return $offerss = Offer::where('agence_id',$id )->get();
+        $user = $request->user();
+       $agence = Agence::where('user_id', $user['id'])->first();
+    //    $input['agence_id']=$agence['id'];
+
+
+        $offerss = Offer::where('agence_id',$agence['id'] )->get();
+        
+return response(json_encode($offerss), 201);;
+
+        // $offerss['photo']=json_decode($offerss['photo']);
+
+        // return $response()->json([
+        //     'data'=>[
+                // 'id'=>id,
+                // 'agence_id'=>agence_id,
+                // 'type_vente'=>type_vente,
+                // 'address'=>address,
+                // 'description'=>description,
+                // 'price'=>price,
+                // 'space'=>space,
+                // 'n_etage'=>n_etage,
+                // 'n_chambre'=>n_chambre,
+                // 'wilaya'=>wilaya,
+                // 'photo'=>[json_decode(photo)],
+                // 'type_offer'=>type_offer,
+                // 'condition_de_paiment'=>[json_decode(condition_de_paiment)],
+                // 'specification'=>[json_decode(specification)],
+                // 'papiers'=>[json_decode(papiers)],
+                // 'created_at'=>$offerss['created_at'],
+                // 'updated_at'=>updated_at,
+            // ]
+            // ]);
     }
 
 
