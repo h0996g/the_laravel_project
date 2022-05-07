@@ -99,10 +99,9 @@ class OfferController extends Controller
 
         $offerss = Offer::where('agence_id',$agence['id'] )->get();
 
-        return OfferResource::collection($offerss);
+        return response(OfferResource::collection($offerss), 200);
 
 
-        return response()->json();
 
         // $offerss['photo']=json_decode($offerss['photo']);
 
