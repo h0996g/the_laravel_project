@@ -8,11 +8,11 @@ use App\Models\User;
 use App\Models\Agence;
 use Illuminate\Http\Request;
 use App\Http\Resources\OfferResource;
+use App\Http\Resources\OfferCollection;
 
 class OfferController extends Controller
 {
     public function createoffer(Request $request){
-
 
 
         // $flight = Offer::create([
@@ -99,7 +99,8 @@ class OfferController extends Controller
 
         $offerss = Offer::where('agence_id',$agence['id'] )->get();
 
-        return response(OfferResource::collection($offerss), 200);
+        //return response(OfferResource::collection($offerss), 200);
+        return response(new OfferCollection($offerss),201);
 
 
 
