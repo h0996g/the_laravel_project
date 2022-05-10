@@ -100,7 +100,7 @@ class OfferController extends Controller
         $offerss = Offer::where('agence_id',$agence['id'] )->get();
 
         //return response(OfferResource::collection($offerss), 200);
-        return response(new OfferCollection($offerss),201);
+        return response(new OfferCollection($offerss),200);
 
 
 
