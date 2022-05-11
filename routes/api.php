@@ -54,6 +54,7 @@ Route::middleware('auth:sanctum')->get('/getofferall', 'OfferController@getoffer
 Route::middleware('auth:sanctum')->get('/getofferid/{a}/{b}/{c}', 'OfferController@getofferid');
 //Route::get('/getofferid/{a}/{b}/{c}', 'OfferController@getofferid}');
 Route::middleware('auth:sanctum')->get('/getofferagence', 'OfferController@getofferagence');
+Route::middleware('auth:sanctum')->get('/gg', 'OfferController@gg');
 //Route::get('/getofferagence/{a}', 'OfferController@getofferagence');
 Route::middleware('auth:sanctum')->get('/getoffercategorie/{a}', 'OfferController@getoffercategorie');
 //Route::get('/getoffercategorie/{a}', 'OfferController@getoffercategorie');

@@ -94,39 +94,17 @@ class OfferController extends Controller
 
         $user = $request->user();
         $agence = Agence::where('user_id', $user['id'])->first();
-    //    $input['agence_id']=$agence['id'];
-
-
         $offerss = Offer::where('agence_id',$agence['id'] )->get();
-
         //return response(OfferResource::collection($offerss), 200);
         return response(new OfferCollection($offerss),200);
+    }
+    public function gg(Request $request){
 
-
-
-        // $offerss['photo']=json_decode($offerss['photo']);
-
-        // return $response()->json([
-        //     'data'=>[
-                // 'id'=>id,
-                // 'agence_id'=>agence_id,
-                // 'type_vente'=>type_vente,
-                // 'address'=>address,
-                // 'description'=>description,
-                // 'price'=>price,
-                // 'space'=>space,
-                // 'n_etage'=>n_etage,
-                // 'n_chambre'=>n_chambre,
-                // 'wilaya'=>wilaya,
-                // 'photo'=>[json_decode(photo)],
-                // 'type_offer'=>type_offer,
-                // 'condition_de_paiment'=>[json_decode(condition_de_paiment)],
-                // 'specification'=>[json_decode(specification)],
-                // 'papiers'=>[json_decode(papiers)],
-                // 'created_at'=>$offerss['created_at'],
-                // 'updated_at'=>updated_at,
-            // ]
-            // ]);
+        $user = $request->user();
+        $agence = Agence::where('user_id', $user['id'])->first();
+        $offerss = Offer::where('agence_id',$agence['id'] )->get(['photo','id']);
+        //return response(OfferResource::collection($offerss), 200);
+        return $offerss;
     }
 
 

@@ -25,7 +25,7 @@ class OfferResource extends JsonResource
               "n_etage" => $this->n_etage,
               "n_chambre" => $this->n_chambre,
               "wilaya" => $this->wilaya,
-              "photo" => json_decode($this->photo, true),
+                "photo" => json_decode($this->photo, true),
               "type_offer" => $this->type_offer,
               "condition_de_paiment" =>json_decode($this->condition_de_paiment, true),
               "specification" => json_decode($this->specification, true),
