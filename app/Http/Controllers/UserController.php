@@ -63,30 +63,38 @@ class UserController extends Controller
     }
     
     
-//     public function updateagencePassword(Request $request)
-//     {
+    public function updateagencePassword(Request $request)
+    {
+        $request->validate([
+            'oldpassword' => 'required',
+            'newpassword' => 'required',
+        ]);
        
-       
-//         $a= $request->user();
-// $oldpass= $a['password'];
+        $a= $request->user();
+        $oldpassuser= $a['password'];
 
-//             if(Hash::make($oldpass)== Hash::make($request['password'])){
-//                 // user::where('id', $a['id'])
-//                 //     ->update([
-//                 //         // 'email'=>$request['email'] 
-//                 //          'password'=>$request['password']=Hash::make($request['password'])
+
+            if(
+                // Hash::make($oldpass)== Hash::make($request['password'])
+                Hash::check($request['oldpassword'], $oldpassuser)
+                ){
+
+                user::where('id', $a['id'])
+                    ->update([
+                        // 'email'=>$request['email'] 
+                         'password'=>$request['newpassword']=Hash::make($request['newpassword'])
                         
-//                 //     ]);
-//                     return 'Good';
+                    ]);
+                    return 'Password changed Successfuly';
 
-//             }else{
-//                 // print (Hash::make($request['password']));
-//                 //  print('/n');
-//                  print( $oldpass);
-//                 return 'sorry';
-//             }
+            }else{
+                // print (Hash::make($request['password']));
+                //  print('/n');
+                
+                return response()->json(['message' => 'The old password is incorrect.'], 422);
+            }
        
-//     }
+    }
 
 
 
