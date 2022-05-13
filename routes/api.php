@@ -54,7 +54,7 @@ Route::middleware('auth:sanctum')->get('/getofferall', 'OfferController@getoffer
 Route::middleware('auth:sanctum')->get('/getofferid/{a}/{b}/{c}', 'OfferController@getofferid');
 //Route::get('/getofferid/{a}/{b}/{c}', 'OfferController@getofferid}');
 Route::middleware('auth:sanctum')->get('/getofferagence', 'OfferController@getofferagence');
-Route::middleware('auth:sanctum')->get('/gg', 'OfferController@gg');
+// Route::middleware('auth:sanctum')->get('/gg', 'OfferController@gg');
 //Route::get('/getofferagence/{a}', 'OfferController@getofferagence');
 Route::middleware('auth:sanctum')->get('/getoffercategorie/{a}', 'OfferController@getoffercategorie');
 //Route::get('/getoffercategorie/{a}', 'OfferController@getoffercategorie');
@@ -66,7 +66,8 @@ Route::middleware('auth:sanctum')->delete('/deleteoffer/{a}', 'OfferController@d
 //user routes
 Route::middleware('auth:sanctum')->get('/getuser', '\App\Http\Controllers\UserController@getuser');
 //Route::get('/getuser', 'UserController@getuser');
-Route::middleware('auth:sanctum')->post('/updateagence', '\App\Http\Controllers\UserController@updateagence');
+Route::middleware('auth:sanctum')->post('/updateagence', 'UserController@updateagence');
+Route::middleware('auth:sanctum')->post('/updateagencePassword', 'UserController@updateagencePassword');
 //Route::post('/updateagence/{id}', 'UserController@updateagence');
 Route::middleware('auth:sanctum')->post('/updateclient', '\App\Http\Controllers\UserController@updateclient');
 //Route::post('/updateclient/{id}', 'UserController@updateclient');

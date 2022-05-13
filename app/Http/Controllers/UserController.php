@@ -49,14 +49,47 @@ class UserController extends Controller
      */
     public function updateagence(Request $request)
     {
+        $a= $request->user();
 
-        user::where('id', $request['id'])
-            ->update(['name' => $request['name'],
-                'email'=>$request['email'] ,'password'=>$request['password']=Hash::make($request['password']),'phone' => $request['phone']]);
-        Agence::where('user_id',$request['id'])
+        user::where('id', $a['id'])
+            ->update(['name' => $request['name']
+                // 'email'=>$request['email'] 
+                // 'password'=>$request['password']=Hash::make($request['password'])
+                ,'phone' => $request['phone']
+            ]);
+        Agence::where('user_id',$a['id'])
             ->update(['address' => $request['address']]);
         return 'that change happened 10 sec ago';
     }
+    
+    
+//     public function updateagencePassword(Request $request)
+//     {
+       
+       
+//         $a= $request->user();
+// $oldpass= $a['password'];
+
+//             if(Hash::make($oldpass)== Hash::make($request['password'])){
+//                 // user::where('id', $a['id'])
+//                 //     ->update([
+//                 //         // 'email'=>$request['email'] 
+//                 //          'password'=>$request['password']=Hash::make($request['password'])
+                        
+//                 //     ]);
+//                     return 'Good';
+
+//             }else{
+//                 // print (Hash::make($request['password']));
+//                 //  print('/n');
+//                  print( $oldpass);
+//                 return 'sorry';
+//             }
+       
+//     }
+
+
+
 
 //    public function updateagence(Request $request, $id)
 //    {
