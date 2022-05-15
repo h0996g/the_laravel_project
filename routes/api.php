@@ -69,7 +69,7 @@ Route::middleware('auth:sanctum')->get('/getuser', '\App\Http\Controllers\UserCo
 Route::middleware('auth:sanctum')->post('/updateagence', 'UserController@updateagence');
 Route::middleware('auth:sanctum')->post('/updateagencePassword', 'UserController@updateagencePassword');
 //Route::post('/updateagence/{id}', 'UserController@updateagence');
-Route::middleware('auth:sanctum')->post('/updateclient', '\App\Http\Controllers\UserController@updateclient');
+Route::middleware('auth:sanctum')->post('/updateclient', 'UserController@updateclient');
 //Route::post('/updateclient/{id}', 'UserController@updateclient');
 //Route::middleware('auth:sanctum')->get('/searchagence', '\App\Http\Controllers\UserController@search');
 Route::get('/searchagence/{search}', 'UserController@search');

@@ -118,12 +118,13 @@ class UserController extends Controller
      */
     public function updateclient(Request $request)
     {
+        $a= $request->user();
 
-
-        user::where('id', $request['id'])
+        user::where('id', $a['id'])
             ->update(['name' => $request['name'],
-                'email'=>$request['email'] ,'password'=>$request['password']=Hash::make($request['password']),'phone' => $request['phone']]);
-        Client::where('user_id',$request['id'])
+                // 'email'=>$request['email'] ,'password'=>$request['password']=Hash::make($request['password']),
+                'phone' => $request['phone']]);
+        Client::where('user_id',$a['id'])
             ->update(['prenom' => $request['prenom']]);
         return 'that change happened 10 sec ago';
     }
