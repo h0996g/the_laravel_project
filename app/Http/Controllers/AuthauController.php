@@ -31,13 +31,13 @@ class AuthauController extends Controller
         }
         $input = $request->except('prenom');
         $input['password'] = Hash::make($input['password']);
-        // $inputclient['user_id']=user()->id;
+        
         $user = User::create($input);
         $inputclient = $request->only('prenom');
         $inputclient['user_id'] = $user['id'];
         $userclient = Client::create($inputclient);
         $response['token'] = $user->createToken($request->email)->plainTextToken;
-//         na7itha 3la khater mdyro yro7 l Login wra my ymrki mch yodkhol tol lel App
+
         $response['user'] = $user;
         $response['client'] = $userclient;
 
@@ -69,7 +69,7 @@ class AuthauController extends Controller
         $inputagence['user_id'] = $user['id'];
         $useragence = Agence::create($inputagence);
         $response['token'] = $user->createToken($request->email)->plainTextToken;
-//         na7itha 3la khater mdyro yro7 l Login wra my ymrki mch yodkhol tol lel App
+
         $response['user'] = $user;
         $response['agence'] = $useragence;
 

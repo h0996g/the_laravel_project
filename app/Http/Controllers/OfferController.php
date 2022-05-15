@@ -68,7 +68,12 @@ class OfferController extends Controller
 
     public function getofferall(){
 
-        return $offer = Offer::where('id', '!=', auth()->id())->get();
+        // return $offer = Offer::where('id', '!=', auth()->id())->get();
+       
+        // $offer = Offer::where('id', '!=', auth()->id())->get();
+        $offer = Offer::get();
+
+         return response(new OfferCollection($offer),200);
 
 
     }
@@ -108,9 +113,22 @@ class OfferController extends Controller
     }
 
 
-    public function getoffercategorie($id){
+    public function getoffercategorie($type){
+            
+//    print($type);
 
-        return $offersss = Offer::where('category_id',$id )->get();
+                if($type=='Tout'){
+                    $offersss = Offer::get();
+
+                }else {
+
+                    $offersss = Offer::where('type_vente',$type)->get();
+                }
+
+
+
+        // //  return $offersss;
+         return response(new OfferCollection($offersss),200);
     }
 
 
