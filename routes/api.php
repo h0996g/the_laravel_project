@@ -78,7 +78,9 @@ Route::get('/searchagence/{search}', 'UserController@search');
 // favorite routes
 Route::middleware('auth:sanctum')->post('/addfavorite', 'FavoriteController@ajouterfavorit');
 //Route::post('/addfavorite', 'FavoriteController@ajouterfavorit');
-Route::middleware('auth:sanctum')->delete('/deletefavorite/{a}/{b}', 'FavoriteController@deletefavorite');
+Route::middleware('auth:sanctum')->delete('/deletefavorite', 'FavoriteController@deletefavorite');
+
+Route::middleware('auth:sanctum')->post('/searchfavorit', 'FavoriteController@searchfavorit');
 //Route::delete('/deletefavorite/{a}/{b}', 'FavoriteController@deletefavorite');
 Route::middleware('auth:sanctum')->get('/getfavorite/{a}', 'FavoriteController@getfavorite');
 //Route::get('/getfavorite/{a}', 'FavoriteController@getfavorite');
