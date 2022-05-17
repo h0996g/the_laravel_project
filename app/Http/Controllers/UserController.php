@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agence;
 use App\Models\Client;
+use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -53,7 +54,7 @@ class UserController extends Controller
 
         user::where('id', $a['id'])
             ->update(['name' => $request['name']
-                // 'email'=>$request['email'] 
+                // 'email'=>$request['email']
                 // 'password'=>$request['password']=Hash::make($request['password'])
                 ,'phone' => $request['phone']
             ]);
@@ -61,15 +62,15 @@ class UserController extends Controller
             ->update(['address' => $request['address']]);
         return 'that change happened 10 sec ago';
     }
-    
-    
+
+
     public function updateagencePassword(Request $request)
     {
         $request->validate([
             'oldpassword' => 'required',
             'newpassword' => 'required',
         ]);
-       
+
         $a= $request->user();
         $oldpassuser= $a['password'];
 
@@ -81,19 +82,19 @@ class UserController extends Controller
 
                 user::where('id', $a['id'])
                     ->update([
-                        // 'email'=>$request['email'] 
+                        // 'email'=>$request['email']
                          'password'=>$request['newpassword']=Hash::make($request['newpassword'])
-                        
+
                     ]);
                     return 'Password changed Successfuly';
 
             }else{
                 // print (Hash::make($request['password']));
                 //  print('/n');
-                
+
                 return response()->json(['message' => 'The old password is incorrect.'], 422);
             }
-       
+
     }
 
 
@@ -175,4 +176,23 @@ class UserController extends Controller
             ->select('users.name')->where('name' , 'like' ,$search.'%')->get();
         return $liste;
     }
+
+    public function searchagence(Request $request){
+
+
+$liste=DB::table('agences')->join('offers','agences.id','=','offers.agence_id')
+    ->join('users','users.id','=','agences.user_id')
+    ->select('offers.*')->where('name' , 'like' ,$request['search'].'%')->get();
+
+        return$liste;
+
+    }
+
+    public function wilaysearch(Request $request){
+        $a=Offer::where('wilaya','like' ,$request['search'].'%')->get();
+        return $a;
+    }
+
+
+
 }

@@ -73,6 +73,8 @@ Route::middleware('auth:sanctum')->post('/updateclient', 'UserController@updatec
 //Route::post('/updateclient/{id}', 'UserController@updateclient');
 //Route::middleware('auth:sanctum')->get('/searchagence', '\App\Http\Controllers\UserController@search');
 Route::get('/searchagence/{search}', 'UserController@search');
+Route::post('/searchagence', 'UserController@searchagence');
+Route::post('/wilayasearch', 'UserController@wilaysearch');
 
 
 // favorite routes
