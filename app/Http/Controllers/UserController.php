@@ -170,12 +170,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function search($search)
-    {
-        $liste=DB::table('users')->join('clients','users.id','=','clients.user_id')
-            ->select('users.name')->where('name' , 'like' ,$search.'%')->get();
-        return $liste;
-    }
+//    public function search($search)
+//    {
+//        $liste=DB::table('users')->join('clients','users.id','=','clients.user_id')
+//            ->select('users.name')->where('name' , 'like' ,$search.'%')->get();
+//        return $liste;
+//    }
 
     public function searchagence(Request $request){
 

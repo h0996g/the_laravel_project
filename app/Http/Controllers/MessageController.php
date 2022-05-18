@@ -2,35 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Favorite;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
     public function ajoutermessage(Request $request){
+        $user = $request->user();
 
         $flight = Message::create([
             'text' => $request['text'],
-            'user_id' => $request['user_id'],
+            'user_id' => $user->id,
             'offer_id' => $request['offer_id'],
         ]);
         return 'message send';
 
     }
-    public function deletemessage($id){
+    public function deletemessage(Request $request){
+        $user = $request->user();
 
-        Message::where('id', $id)
+        Message::where('id', $request['id'])
 
             ->delete();
         return 'remove message seccessfully';
 
 
     }
-    public function getmessage($id){
+    public function getmessage(Request $request){
+        $user = $request->user();
+       return $liste=DB::table('messages')->join('offers','messages.offer_id','=','offers.id')
+            ->join('users','messages.user_id','=','users.id')
+            ->select('messages.*','name')->where('offer_id',$request['offer_id'])->orderby('created_at','asc')->get();
 
 
-        return $favorite = Message::where('offer_id',$id )->orderby('created_at','asc')->get();
 
     }
 }

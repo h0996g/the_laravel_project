@@ -2,17 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OfferCollection;
 use App\Models\Agence;
 use App\Models\Client;
 use App\Models\Favorite;
 use App\Models\Offer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FavoriteController extends Controller
 {
-    public function getfavorite($id){
+    public function getfavorite(Request $request){
+        $user = $request->user();
+        $a=Client::where('user_id',$user->id)->first();
+//        dd($a);
+//        $offer = Offer::get();
 
-        return $favorite = Favorite::where('client_id',$id )->get();
+
+   $liste=DB::table('favorites')->join('offers','favorites.offer_id','=','offers.id')
+
+            ->select('offers.id')->where('client_id',$a['id'])->get();
+
+foreach ($liste as $l){
+$b=Offer::where('id',$l->id)->get();
+//$b=$l->id;
+}
+//   $b=Offer::where('id',$liste)->get();
+//return $b;
+   return response(new OfferCollection($b),200);
 
     }
     public function ajouterfavorit(Request $request){
