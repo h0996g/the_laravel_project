@@ -57,7 +57,8 @@ class UserController extends Controller
             ->update(['name' => $request['name']
                 // 'email'=>$request['email']
                 // 'password'=>$request['password']=Hash::make($request['password'])
-                ,'phone' => $request['phone']
+                ,'phone' => $request['phone'],
+                'photo'=>$request['photo']
             ]);
         Agence::where('user_id',$a['id'])
             ->update(['address' => $request['address']]);
@@ -124,6 +125,7 @@ class UserController extends Controller
 
         user::where('id', $a['id'])
             ->update(['name' => $request['name'],
+            'photo'=>$request['photo'],
                 // 'email'=>$request['email'] ,'password'=>$request['password']=Hash::make($request['password']),
                 'phone' => $request['phone']]);
         Client::where('user_id',$a['id'])
