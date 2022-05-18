@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OfferCollection;
 use App\Models\Agence;
 use App\Models\Client;
 use App\Models\Offer;
@@ -182,15 +183,22 @@ class UserController extends Controller
 
 $liste=DB::table('agences')->join('offers','agences.id','=','offers.agence_id')
     ->join('users','users.id','=','agences.user_id')
-    ->select('offers.*')->where('name' , 'like' ,$request['search'].'%')->get();
+    ->select('offers.id')->where('name' , 'like' ,$request['search'].'%')->get();
 
-        return$liste;
+        foreach ($liste as $l){
+            $b=Offer::where('id',$l->id)->get();
+
+        }
+        return response(new OfferCollection($b),200);
+
+
+
 
     }
 
     public function wilaysearch(Request $request){
         $a=Offer::where('wilaya','like' ,$request['search'].'%')->get();
-        return $a;
+        return response(new OfferCollection($a),200);
     }
 
 
