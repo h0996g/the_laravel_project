@@ -40,29 +40,41 @@ class OfferController extends Controller
         return $offer->only(['description', 'price']);
     }
 
-    public function updateoffer(Request $request,$id){
-            Offer::where('id', $id)
+    public function updateoffer(Request $request){
+        $user = $request->user();
+        $input=$request->except('agence_id',);
+        $agence = Agence::where('user_id', $user['id'])->first();
+        $input['agence_id']=$agence['id'];
+        
+        
+       $offer= Offer::where('id',$request['id'])->update($input);
+       return 'ook';
+    
+       
+    //    Offer::where('id', $id)
 
-            ->update([
-                'agence_id' => $request['agence_id'],
-                'category_id' => $request['category_id'],
-                'address' => $request['address'],
-                'description' => $request['description'],
-                'price' => $request['price'],
-                'space' =>  $request['space'],
-                'n_etage' =>  $request['n_etage'],
-                'n_chambre' =>  $request['n_chambre'],
-                'wilaya' =>  $request['wilaya'],
-                'photo'=>  $request['photo'],
-                'type_vente' =>  $request['type_vente'],
-                'type_offer' =>  $request['type_offer'],
-                'condition_de_paiment' =>  $request['condition_de_paiment'],
-                'specification' =>  $request['specification'],
-                'papiers' =>  $request['papiers'],
-                     ]);
-        return 'the offer has been updated';
+    //         ->update([
+    //             'agence_id' => $request['agence_id'],
+    //             'category_id' => $request['category_id'],
+    //             'address' => $request['address'],
+    //             'description' => $request['description'],
+    //             'price' => $request['price'],
+    //             'space' =>  $request['space'],
+    //             'n_etage' =>  $request['n_etage'],
+    //             'n_chambre' =>  $request['n_chambre'],
+    //             'wilaya' =>  $request['wilaya'],
+    //             'photo'=>  $request['photo'],
+    //             'type_vente' =>  $request['type_vente'],
+    //             'type_offer' =>  $request['type_offer'],
+    //             'condition_de_paiment' =>  $request['condition_de_paiment'],
+    //             'specification' =>  $request['specification'],
+    //             'papiers' =>  $request['papiers'],
+    //                  ]);
+    //     return 'the offer has been updated';
 
 
+   
+   
     }
 
 

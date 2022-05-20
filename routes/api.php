@@ -60,13 +60,13 @@ Route::middleware('auth:sanctum')->get('/getofferagence', 'OfferController@getof
 
 Route::middleware('auth:sanctum')->get('/getoffercategorie/{type?}', 'OfferController@getoffercategorie');
 
-Route::middleware('auth:sanctum')->post('/updateoffer/{a}', 'OfferController@updateoffer');
+Route::middleware('auth:sanctum')->post('/updateoffer', 'OfferController@updateoffer');
 
 Route::middleware('auth:sanctum')->delete('/deleteoffer/{a}', 'OfferController@deleteoffer');
 
 
 //user routes
-Route::middleware('auth:sanctum')->get('/getuser', '\App\Http\Controllers\UserController@getuser');
+    Route::middleware('auth:sanctum')->get('/getuser', '\App\Http\Controllers\UserController@getuser');
 
 Route::middleware('auth:sanctum')->post('/updateagence', 'UserController@updateagence');
 Route::middleware('auth:sanctum')->post('/updateagencePassword', 'UserController@updateagencePassword');
