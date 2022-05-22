@@ -27,7 +27,9 @@ class FavoriteController extends Controller
         }
 
          $b=Offer::whereIn('id',$id)->get();
-        return $b;
+        // return $b;
+        return response(new OfferCollection($b),200);
+
       
     }
     public function ajouterfavorit(Request $request){

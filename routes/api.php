@@ -85,7 +85,7 @@ Route::middleware('auth:sanctum')->delete('/deletefavorite', 'FavoriteController
 
 Route::middleware('auth:sanctum')->post('/searchfavorit', 'FavoriteController@searchfavorit');
 
-Route::middleware('auth:sanctum')->post('/getfavorite', 'FavoriteController@getfavorite');
+Route::middleware('auth:sanctum')->get('/getfavorite', 'FavoriteController@getfavorite');
 
 
 
