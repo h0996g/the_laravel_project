@@ -62,7 +62,7 @@ Route::middleware('auth:sanctum')->get('/getoffercategorie/{type?}', 'OfferContr
 
 Route::middleware('auth:sanctum')->post('/updateoffer', 'OfferController@updateoffer');
 
-Route::middleware('auth:sanctum')->delete('/deleteoffer/{a}', 'OfferController@deleteoffer');
+Route::middleware('auth:sanctum')->post('/deleteoffer', 'OfferController@deleteoffer');
 
 
 //user routes

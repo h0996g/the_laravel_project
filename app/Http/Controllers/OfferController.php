@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Favorite;
+use App\Models\Message;
 use App\Models\Offer;
 use App\Models\User;
 use App\Models\Agence;
@@ -45,12 +46,12 @@ class OfferController extends Controller
         $input=$request->except('agence_id',);
         $agence = Agence::where('user_id', $user['id'])->first();
         $input['agence_id']=$agence['id'];
-        
-        
+
+
        $offer= Offer::where('id',$request['id'])->update($input);
        return 'ook';
-    
-       
+
+
     //    Offer::where('id', $id)
 
     //         ->update([
@@ -73,8 +74,8 @@ class OfferController extends Controller
     //     return 'the offer has been updated';
 
 
-   
-   
+
+
     }
 
 
@@ -140,9 +141,14 @@ class OfferController extends Controller
 
 
 
-    public function deleteoffer($id){
+    public function deleteoffer(Request $request){
+        Message::where('offer_id', $request['offer_id'])
 
-        Offer::where('id', $id)
+            ->delete();
+       Favorite::where('offer_id', $request['offer_id'])
+
+            ->delete();
+        Offer::where('id', $request['offer_id'])
 
             ->delete();
         return 'offer deleted';
