@@ -92,7 +92,7 @@ Route::middleware('auth:sanctum')->post('/getfavorite', 'FavoriteController@getf
 // ---------messages routes
 Route::middleware('auth:sanctum')->post('/addmessage', 'MessageController@ajoutermessage');
 
-Route::middleware('auth:sanctum')->delete('/deletemessage', 'MessageController@deletemessage');
+Route::middleware('auth:sanctum')->post('/deletemessage', 'MessageController@deletemessage');
 
 Route::middleware('auth:sanctum')->post('/getmessage', 'MessageController@getmessage');
 

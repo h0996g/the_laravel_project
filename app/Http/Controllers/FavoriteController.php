@@ -15,22 +15,20 @@ class FavoriteController extends Controller
     public function getfavorite(Request $request){
         $user = $request->user();
         $a=Client::where('user_id',$user->id)->first();
-//        dd($a);
-//        $offer = Offer::get();
 
-
-   $liste=DB::table('favorites')->join('offers','favorites.offer_id','=','offers.id')
-
+        $liste=DB::table('favorites')->join('offers','favorites.offer_id','=','offers.id')
             ->select('offers.id')->where('client_id',$a['id'])->get();
+       
 
-foreach ($liste as $l){
-$b=Offer::where('id',$l->id)->get();
-//$b=$l->id;
-}
-//   $b=Offer::where('id',$liste)->get();
-//return $b;
-   return response(new OfferCollection($b),200);
+        foreach ($liste as $key=>$l){
+            $l= get_object_vars($l);
+            $id[$key]=$l['id'];
+            
+        }
 
+         $b=Offer::whereIn('id',$id)->get();
+        return $b;
+      
     }
     public function ajouterfavorit(Request $request){
         $user = $request->user();
