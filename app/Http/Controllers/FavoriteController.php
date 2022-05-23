@@ -19,7 +19,7 @@ class FavoriteController extends Controller
         $liste=DB::table('favorites')->join('offers','favorites.offer_id','=','offers.id')
             ->select('offers.id')->where('client_id',$a['id'])->get();
        
-
+            $id[0]=-1;
         foreach ($liste as $key=>$l){
             $l= get_object_vars($l);
             $id[$key]=$l['id'];
@@ -28,7 +28,7 @@ class FavoriteController extends Controller
 
          $b=Offer::whereIn('id',$id)->get();
         // return $b;
-        return response(new OfferCollection($b),200);
+        return response(new OfferCollection($b));
 
       
     }
