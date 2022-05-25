@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
     use HasFactory;
-    protected $fillable=['agence_id','category_id','address','description','price','space','n_etage','n_chambre','wilaya','photo','papiers','specification','condition_de_paiment','type_offer','type_vente'];
+    protected $fillable=['agence_id','category_id','address','description','price','space','n_etage','n_chambre','wilaya','photo','papiers','specification','condition_de_paiment','type_offer','type_vente','latitude','longitude'];
 
     protected $casts = [
         'photo' => 'array',
