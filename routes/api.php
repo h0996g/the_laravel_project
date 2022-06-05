@@ -1,6 +1,7 @@
 <?php
 
 use Http\Controller\AuthController;
+use Http\Controller\UserController;
 use Http\Controller\OfferController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -52,11 +53,13 @@ Route::middleware('auth:sanctum')->post('/createoffer', 'OfferController@createo
 Route::middleware('auth:sanctum')->get('/getofferall', 'OfferController@getofferall');
 //-------get name w phone bch nziduhum f detail
 Route::middleware('auth:sanctum')->post('/getnamephone', 'AgenceController@getnamephon');
+Route::middleware('auth:sanctum')->get('/getnamephonuser', 'AgenceController@getnamephonuser');
 //------------------------------
 
 Route::middleware('auth:sanctum')->get('/getofferid/{a}/{b}/{c}', 'OfferController@getofferid');
 
 Route::middleware('auth:sanctum')->get('/getofferagence', 'OfferController@getofferagence');
+Route::middleware('auth:sanctum')->post('/getofferagenceclient', 'OfferController@getofferagenceClient');
 
 Route::middleware('auth:sanctum')->get('/getoffercategorie/{type?}', 'OfferController@getoffercategorie');
 
@@ -67,6 +70,7 @@ Route::middleware('auth:sanctum')->post('/deleteoffer', 'OfferController@deleteo
 
 //user routes
     Route::middleware('auth:sanctum')->get('/getuser', '\App\Http\Controllers\UserController@getuser');
+    // Route::post('/getagenceProfiletoclient', 'UserController@getagenceProfiletoclient');
 
 Route::middleware('auth:sanctum')->post('/updateagence', 'UserController@updateagence');
 Route::middleware('auth:sanctum')->post('/updateagencePassword', 'UserController@updateagencePassword');
@@ -76,6 +80,7 @@ Route::middleware('auth:sanctum')->post('/updateclient', 'UserController@updatec
 //Route::get('/searchagence/{search}', 'UserController@search');
 Route::post('/searchagence', 'UserController@searchagence');
 Route::post('/wilayasearch', 'UserController@wilaysearch');
+Route::post('/getagenceProfiletoclient', 'UserController@getagenceProfiletoclient');
 
 
 // -----------favorite routes

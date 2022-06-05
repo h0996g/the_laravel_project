@@ -115,6 +115,15 @@ class OfferController extends Controller
         //return response(OfferResource::collection($offerss), 200);
         return response(new OfferCollection($offerss),200);
     }
+    public function getofferagenceClient(Request $request){
+
+        $user = $request->user();
+        // $agence = Agence::where('user_id', $user['id'])->first();
+        $offerss = Offer::where('agence_id',$request['agence_id'] )->get();
+        //return response(OfferResource::collection($offerss), 200);
+        return response(new OfferCollection($offerss),200);
+    }
+
     public function gg(Request $request){
 
         $user = $request->user();

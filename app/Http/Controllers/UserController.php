@@ -33,6 +33,22 @@ class UserController extends Controller
 
     }
 
+
+
+
+    public function getagenceProfiletoclient( Request $request)
+    {
+      
+      
+        $agence = Agence::where('id', $request['agence_id'])->first();
+         $a = User::where('id', $agence['user_id'])->first();
+      
+            $a['agence']=$agence;
+    
+        
+        return $a;
+
+    }
     /**
      * Show the form for creating a new resource.
      *
