@@ -16,5 +16,15 @@ class AgenceController extends Controller
         return $liste;
 
     }
+    public function getnamephonuser(Request $request){
+
+        $liste=DB::table('agences')->join('users','agences.user_id','=','users.id')
+            ->select('name','phone','agences.id','photo')->get();
+        return 
+        // response ( $liste,200);
+        response()->json(['data'=>$liste]);
+
+
+    }
 
 }

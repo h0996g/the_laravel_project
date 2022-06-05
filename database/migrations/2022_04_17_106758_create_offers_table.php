@@ -27,6 +27,8 @@ class CreateOffersTable extends Migration
             $table->string('address');
             $table->text('description');
             $table->double('price');
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->double('space');
             $table->integer('n_etage')->nullable();
             $table->integer('n_chambre')->nullable();
@@ -37,7 +39,6 @@ class CreateOffersTable extends Migration
             $table->json('condition_de_paiment')->nullable();
             $table->json('specification')->nullable();
             $table->json('papiers')->nullable();
-
             $table->timestamps();
         });
     }
