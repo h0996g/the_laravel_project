@@ -35,7 +35,7 @@ class MessageController extends Controller
         $user = $request->user();
        return $liste=DB::table('messages')->join('offers','messages.offer_id','=','offers.id')
             ->join('users','messages.user_id','=','users.id')
-            ->select('messages.*','name',)->where('offer_id',$request['offer_id'])->orderby('created_at','asc')->get();
+            ->select('messages.*','name','users.photo')->where('offer_id',$request['offer_id'])->orderby('created_at','asc')->get();
 
 
 
